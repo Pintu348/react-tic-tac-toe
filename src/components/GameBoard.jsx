@@ -1,14 +1,6 @@
 import React from "react";
-import PropTypes from 'prop-types';
-const intialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null]
-]
-
-
-
-export default function GameBoard({ onSelectSquare, gameTurns }) {
+import PropTypes from "prop-types";
+export default function GameBoard({ onSelectSquare, gameBoard }) {
   // const [boardvalue, setBoardValue] = useState(intialGameBoard)
   // function handleBtnClick(rowIndex, colIndex) {
   //   setBoardValue((preGameBoard) => {
@@ -18,29 +10,28 @@ export default function GameBoard({ onSelectSquare, gameTurns }) {
   //   })
   //   onSelectSquare();
   // }
-  const boardValue = intialGameBoard;
-  for (let turn of gameTurns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-    boardValue[row][col] = player;
-  }
+
 
   return (
-    <ol id="game-board">
-      {boardValue.map((row, rowIndex) =>
+    <ol id='game-board'>
+      {gameBoard.map((row, rowIndex) => (
         <li key={rowIndex}>
-          <ol id="pre-game">
-            {row.map((col, colIndex) =>
-              <li key={colIndex}><button onClick={() => onSelectSquare(rowIndex, colIndex)}>{col}</button></li>
-            )}
+          <ol id='pre-game'>
+            {row.map((playerSymbol, colIndex) => (
+              <li key={colIndex}>
+                <button onClick={() => onSelectSquare(rowIndex, colIndex)} disabled={playerSymbol !== null}>
+                  {playerSymbol}
+                </button>
+              </li>
+            ))}
           </ol>
         </li>
-      )}
+      ))}
     </ol>
   );
 }
 
 GameBoard.propTypes = {
   onSelectSquare: PropTypes.func.isRequired,
-  turn: PropTypes.array.isRequired
-}
+  gameBoard: PropTypes.array.isRequired,
+};
