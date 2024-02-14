@@ -6,7 +6,7 @@ export default function GameOver({ winner, onRestart }) {
     <div id="game-over">
       <h2>Game Over!</h2>
       {winner ? <p>{winner.toUpperCase()} is Won!</p> : <p> It&apos;s Draw</p>}
-      <button onClick={onRestart}>REMATCH!</button>
+      <button onClick={onRestart}>RESTART!</button>
     </div>
   )
 }
